@@ -5,30 +5,30 @@ import seaborn as sns
 import sys
 
 def setup_database(conn):
-    """Létrehozza a táblát és feltölti adatokkal, ha üres."""
+    """Creates the table and populates it with data if empty."""
     cursor = conn.cursor()
-    cursor.execute("DROP TABLE IF EXISTS hirdetesek")
+    cursor.execute("DROP TABLE IF EXISTS real_estate_ads")
     cursor.execute("""
-        CREATE TABLE hirdetesek (
-            varosresz TEXT,
-            ar_millio REAL,
-            meret_m2 INTEGER,
-            tipus TEXT
+        CREATE TABLE real_estate_ads (
+            district TEXT,
+            price_millions REAL,
+            size_m2 INTEGER,
+            property_type TEXT
         )
     """)
-    piaci_adatok = [
-        ('Belváros', 68.5, 75, 'Tégla'),
-        ('Oladi domb', 82.0, 90, 'Új építésű'),
+    market_data = [
+        ('Belváros', 68.5, 75, 'Brick'),
+        ('Oladi domb', 82.0, 90, 'New Construction'),
         ('Oladi ltp.', 38.5, 55, 'Panel'),
         ('Derkovits ltp.', 41.0, 58, 'Panel'),
-        ('Kámon', 75.0, 110, 'Családi ház'),
-        ('Újperint', 88.0, 125, 'Családi ház'),
+        ('Kámon', 75.0, 110, 'House'),
+        ('Újperint', 88.0, 125, 'House'),
         ('Joskar-Ola', 35.0, 52, 'Panel'),
-        ('Sarlay-telep', 95.0, 85, 'Prémium'),
-        ('Kiszely ltp.', 44.5, 62, 'Tégla'),
-        ('Zanat', 79.0, 130, 'Családi ház')
+        ('Sarlay-telep', 95.0, 85, 'Premium'),
+        ('Kiszely ltp.', 44.5, 62, 'Brick'),
+        ('Zanat', 79.0, 130, 'House')
     ]
-    cursor.executemany("INSERT INTO hirdetesek VALUES (?, ?, ?, ?)", piaci_adatok)
+    cursor.executemany("INSERT INTO real_estate_ads VALUES (?, ?, ?, ?)", market_data)
     conn.commit()
 
 def run_analysis():
@@ -37,27 +37,27 @@ def run_analysis():
     try:
         conn = sqlite3.connect(db_name)
         
-        # 1. Adatok ellenőrzése/beállítása
+        # 1. Check/Setup data
         setup_database(conn)
         
-        # 2. Adatok beolvasása
-        df = pd.read_sql_query("SELECT * FROM hirdetesek", conn)
+        # 2. Read data
+        df = pd.read_sql_query("SELECT * FROM real_estate_ads", conn)
         
         if df.empty:
-            print("Hiba: Nincsenek adatok az adatbázisban.")
+            print("Error: No data found in the database.")
             return
 
-        # 3. Professzionális vizualizáció
+        # 3. Professional visualization
         sns.set_theme(style="whitegrid")
         plt.figure(figsize=(12, 8))
         
-        # Buborékdiagram
+        # Scatter plot (Bubble chart)
         scatter = sns.scatterplot(
             data=df, 
-            x='meret_m2', 
-            y='ar_millio', 
-            hue='ar_millio', 
-            size='meret_m2',
+            x='size_m2', 
+            y='price_millions', 
+            hue='price_millions', 
+            size='size_m2',
             sizes=(100, 600),
             palette='magma',
             edgecolor='black',
@@ -65,32 +65,32 @@ def run_analysis():
             legend=None
         )
 
-        # Feliratozás
+        # Annotations
         for i in range(df.shape[0]):
             plt.text(
-                df.meret_m2[i]+2, 
-                df.ar_millio[i]+1, 
-                df.varosresz[i], 
+                df.size_m2[i]+2, 
+                df.price_millions[i]+1, 
+                df.district[i], 
                 fontsize=10, 
                 fontweight='bold',
                 bbox=dict(facecolor='white', alpha=0.6, edgecolor='none')
             )
 
-        # Trendvonal és design
-        sns.regplot(data=df, x='meret_m2', y='ar_millio', scatter=False, color='gray', line_kws={"ls":"--", "lw":1})
+        # Trendline and design
+        sns.regplot(data=df, x='size_m2', y='price_millions', scatter=False, color='gray', line_kws={"ls":"--", "lw":1})
         
-        plt.title('Szombathelyi Ingatlanpiaci Elemzés - 2026', fontsize=20, fontweight='bold', pad=20)
-        plt.xlabel('Alapterület (m²)', fontsize=14)
-        plt.ylabel('Vételár (Millió Ft)', fontsize=14)
+        plt.title('Szombathely Real Estate Market Analysis - 2026', fontsize=20, fontweight='bold', pad=20)
+        plt.xlabel('Floor Area (m²)', fontsize=14)
+        plt.ylabel('Purchase Price (Million HUF)', fontsize=14)
         
         plt.tight_layout()
-        print("Grafikon sikeresen elkészült!")
+        print("Chart generated successfully!")
         plt.show()
 
     except sqlite3.DatabaseError:
-        print(f"HIBA: A(z) {db_name} fájl nem érvényes adatbázis!")
+        print(f"ERROR: The file {db_name} is not a valid database!")
     except Exception as e:
-        print(f"Hiba történt: {e}")
+        print(f"An error occurred: {e}")
     finally:
         if 'conn' in locals():
             conn.close()

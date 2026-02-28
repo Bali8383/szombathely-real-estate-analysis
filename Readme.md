@@ -1,39 +1,25 @@
-# 🏠 Szombathelyi Ingatlanpiaci Analitika 2026
+📊 Python Data Parsing & Visualization Script (Real Estate Market)
+📝 Overview
+A Python-based automation and data analysis tool designed to ingest, clean, and visualize large, unstructured datasets.
 
-## 👨‍💻 Fejlesztői Profil
-**Kovács Balázs** – *Szoftverfejlesztő BSc hallgató (Brigham Young University - Idaho)*
+While this specific script processes real estate market trends from Szombathely, the core objective of this project is to demonstrate foundational System Administration and IT Support skills: the ability to take raw, messy data (similar to complex server logs or user databases), clean it using automated scripts, and extract actionable, clear insights.
 
-Ez a projekt a BYU-Idaho egyetemen végzett tanulmányaim során elsajátított adatbázis-kezelési (SQL) és Python programozási ismereteim gyakorlati alkalmazása. A cél egy olyan technikai megoldás bemutatása, amely valós adatokon alapulva segíti a helyi ingatlanpiaci döntéshozatalt.
+🛠️ Technologies Used
+Language: Python 3
 
----
+Data Processing: Pandas
 
-## 🎯 Projekt Áttekintése
-A szoftver egy automatizált adatfeldolgozó rendszer, amely a szombathelyi ingatlanpiac összefüggéseit elemzi. Segítségével vizuálisan is átláthatóvá válik az ingatlanok alapterülete és piaci ára közötti kapcsolat a különböző városrészekben (pl. Belváros, Oladi domb, Derkovits-lakótelep).
+Data Visualization: Matplotlib, Seaborn
 
-## 🛠️ Technológiai Eszköztár
-* **Nyelv:** Python 3.10+
-* **Adatbázis:** SQLite3 (Relációs adatmodellezés)
-* **Adatkezelés:** Pandas (DataFrame műveletek)
-* **Vizualizáció:** Seaborn & Matplotlib (Haladó statisztikai grafikonok)
-* **Verziókezelés:** Git & GitHub
+💡 Key IT & Troubleshooting Skills Demonstrated
+Automated Data Cleaning: Utilized the pandas library to systematically process raw datasets, handling missing values, and organizing property information efficiently.
 
-## 🚀 Főbb Funkciók
-1.  **Automatizált Adatbázis Életciklus:** A program indításkor automatikusan létrehozza, validálja és naprakész adatokkal tölti fel az SQL táblákat.
-2.  **Robusztus Hibakezelés:** Beépített `try-except` blokkok biztosítják a szoftver stabilitását adatbázis-hiba vagy hiányzó függőségek esetén.
-3.  **Adatvezérelt Betekintés:**
-    * **Színkódolt Pontdiagram:** A pontok színe az árszintet tükrözi (Magma színskála).
-    * **Buborék-méretezés:** A pontok mérete az ingatlan alapterületét szemlélteti.
-    * **Regressziós Analízis:** Beépített trendvonal segíti a piaci anomáliák és a túlárazott ingatlanok felismerését.
+Complex Filtering Logic: Implemented advanced filtering and data manipulation techniques to isolate specific data points and anomalies.
 
+Visual Reporting: Translated thousands of raw data rows into clear, user-friendly visual charts (graphs/plots) representing price fluctuations and market distribution.
 
+Version Control: Maintained clear project documentation and code history using Git and GitHub.
 
-## 📊 Piaci Következtetések (Insights)
-Az elemzés rávilágít a lokáció és a presztízsérték hatására a szombathelyi piacon:
-* **Prémium Övezetek:** Az Oladi domb és a Sarlay-telep ingatlanai konzisztensen a trendvonal felett helyezkednek el, jelezve a magasabb négyzetméterárat.
-* **Befektetési Lehetőségek:** A lakótelepi övezetek (Derkovits, Joskar-Ola) lineárisabb, kiszámíthatóbb árazási modellt mutatnak, ami stabil befektetési környezetet sugall.
+🎯 Why This Matters for IT Support
+In a modern IT environment, identifying the root cause of an issue often requires parsing through thousands of lines of system logs, event viewers, or user data. This project showcases my analytical thinking and my ability to write Python scripts that automate data extraction, organize information logically, and present findings clearly to both technical and non-technical stakeholders.
 
-## 🛠️ Telepítés és Futtatás
-
-1. A tároló (repository) másolása:
-   ```bash
-   git clone [https://github.com/kovacsbalazs/szombathely-ingatlan-vizu.git](https://github.com/kovacsbalazs/szombathely-ingatlan-vizu.git)

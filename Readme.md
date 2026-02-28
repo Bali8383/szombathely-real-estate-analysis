@@ -5,6 +5,8 @@ Balázs Kovács – IT Support & System Administration Student (Ensign College)
 📝 Overview
 A Python-based automation and data analysis tool designed to ingest, clean, and visualize large, unstructured datasets.
 
+![Szombathely Real Estate Analysis](Figure_1.png)
+
 While this specific script processes real estate market trends from Szombathely, the core objective of this project is to demonstrate foundational System Administration and IT Support skills: the ability to take raw, messy data (similar to complex server logs or user databases), clean it using automated scripts, manage local databases, and extract actionable, clear insights.
 
 🛠️ Technologies Used
@@ -44,4 +46,5 @@ pip install pandas matplotlib seaborn requests beautifulsoup4
 Run the analysis script to generate the local database and visual reports:
 
 Bash
+
 python vizualizacio.py

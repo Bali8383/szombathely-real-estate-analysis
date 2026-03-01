@@ -45,6 +45,8 @@ Bash
 pip install pandas matplotlib seaborn requests beautifulsoup4
 Run the analysis script to generate the local database and visual reports:
 
-Bash
+Bash 
+
 
 python vizualizacio.py
+
